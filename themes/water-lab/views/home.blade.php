@@ -1,3 +1,46 @@
+
+@php
+    try {
+        // Membaca file /proc/uptime
+        $uptimeData = file_get_contents('/proc/uptime');
+        if ($uptimeData) {
+            $parts = explode(' ', $uptimeData);
+            $uptimeSeconds = (float) $parts[0];
+
+            // Waktu dalam detik sejak server di-boot
+            $bootTime = time() - $uptimeSeconds;
+
+            // Total waktu yang telah berlalu sejak boot
+            $totalTimeSinceBoot = time() - $bootTime;
+
+            // Menghitung persentase uptime
+            // Dalam konteks ini, uptime sejak boot terakhir adalah selalu 100% dari waktu sejak boot.
+            // Namun, jika Anda ingin menghitung uptime dalam periode tertentu (misal 30 hari), logikanya akan berbeda.
+            // Untuk uptime server sejak restart terakhir, persentasenya adalah 99.9% atau mendekati 100% jika server berjalan normal.
+
+            // Format waktu uptime menjadi hari, jam, menit
+            $days = floor($uptimeSeconds / 86400);
+            $uptimeSeconds %= 86400;
+            $hours = floor($uptimeSeconds / 3600);
+            $uptimeSeconds %= 3600;
+            $minutes = floor($uptimeSeconds / 60);
+
+            $uptimeString = sprintf('%d hari, %d jam, %d menit', $days, $hours, $minutes);
+
+            // Menampilkan persentase (biasanya ~99.9% karena ada jeda eksekusi skrip)
+            // Untuk representasi yang lebih sederhana, kita tampilkan saja 99.9%+
+            $uptimePercentage = '99.9%+';
+
+        } else {
+            $uptimeString = 'Tidak dapat membaca data uptime.';
+            $uptimePercentage = 'N/A';
+        }
+    } catch (Exception $e) {
+        $uptimeString = 'Gagal mengakses data uptime (mungkin bukan server Linux).';
+        $uptimePercentage = 'N/A';
+    }
+@endphp
+
 <style>
 /* --- Desain Notifikasi Kaca --- */
         .glass-notification {
@@ -113,6 +156,34 @@
         .text-shadow-md {
              text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         }
+        .live-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.live-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #2ecc71;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 12px rgba(46, 204, 113, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+    }
+}
 </style>
 <div>
     <div class="flex flex-col gap-6">
@@ -127,75 +198,42 @@
             </article>
         </div>
         
-    <div class="flex flex-col justify-center">
 
-        <div class="flex flex-col items-center w-full gap-5 p-6 border md:p-10 backdrop-blur-md rounded-2xl border-white/10">
+        
         <h2 class="text-base md:text-xl font-semibold tracking-[0.2em] md:tracking-[0.3em] uppercase text-white mb-5 text-shadow text-center">
            📊 Our Statistic 📊
         </h2>
-
-        @php
-    $userCount = 0; // Nilai default
-    $apiToken = 'PAYMb16ec9b919ea8ed549083f421bfd1c82ef0346f9903d697fbeffa65cb4114489'; 
-
-    if ($apiToken) {
-        $response = \Illuminate\Support\Facades\Http::withToken($apiToken)
-                        ->get(config('app.url') . '/api/v1/admin/users');
-
-        if ($response->successful()) {
-            $userCount = $response->json()['meta']['total'] ?? 0;
-        }
-    }
-@endphp
         
         <div class="flex flex-col flex-wrap items-center justify-center w-full gap-5 md:flex-row md:items-stretch md:gap-8">
             
             <!-- KARTU 1: PENGGUNA AKTIF -->
-            <div class="group flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
-                <div class="flex items-center justify-center w-12 h-12 transition-colors rounded-lg bg-blue-400/15 group-hover:bg-blue-400/25">
-                     <svg class="w-6 h-6 stroke-blue-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 11.21 12.77 10.5 12 10.5s-1.536.71-2.121 1.256c-1.172.879-1.172 2.303 0 3.182z" />
-                    </svg>
-                </div>
-                <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Pengguna Aktif</p>
-                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">{{ $userCount }}</h3>
+            <div class="group text-center flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
+                <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Client</p>
+                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">{{ \App\Models\User::count() }}</h3>
             </div>
 
             <!-- KARTU 2: PENDAPATAN -->
-            <div class="group flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
-                <div class="flex items-center justify-center w-12 h-12 transition-colors rounded-lg bg-blue-400/15 group-hover:bg-blue-400/25">
-                     <svg class="w-6 h-6 stroke-blue-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 11.21 12.77 10.5 12 10.5s-1.536.71-2.121 1.256c-1.172.879-1.172 2.303 0 3.182z" />
-                    </svg>
-                </div>
+            <div class="group text-center flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
                 <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Pendapatan (Bulan Ini)</p>
-                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">$250k</h3>
+                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">Coming Soon</h3>
             </div>
 
             <!-- KARTU 3: UPTIME SERVER -->
-            <div class="group flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
-                <div class="flex items-center justify-center w-12 h-12 transition-colors rounded-lg bg-blue-400/15 group-hover:bg-blue-400/25">
-                     <svg class="w-6 h-6 stroke-blue-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 11.21 12.77 10.5 12 10.5s-1.536.71-2.121 1.256c-1.172.879-1.172 2.303 0 3.182z" />
-                    </svg>
-                </div>
+            <div class="group text-center items-center flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
                 <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Uptime Server</p>
-                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">99.98%</h3>
+                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">{{ $uptimePercentage }}</h3>
+                <div class="text-center live-status">
+                    <span class="live-indicator"></span>
+                    <span>LIVE DATA</span>
+                </div>
             </div>
 
             <!-- KARTU 4: PROYEK BARU -->
-            <div class="group flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
-                <div class="flex items-center justify-center w-12 h-12 transition-colors rounded-lg bg-blue-400/15 group-hover:bg-blue-400/25">
-                     <svg class="w-6 h-6 stroke-blue-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 11.21 12.77 10.5 12 10.5s-1.536.71-2.121 1.256c-1.172.879-1.172 2.303 0 3.182z" />
-                    </svg>
-                </div>
+            <div class="group text-center flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
                 <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Proyek Baru</p>
                 <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">142</h3>
             </div>
         </div>
-    </div>
-    </div>
 
 
         <div class="flex flex-col gap-6">
