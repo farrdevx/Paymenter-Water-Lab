@@ -257,13 +257,13 @@
             <!-- KARTU 1: PENGGUNA AKTIF -->
             <div class="group text-center flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
                 <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Client</p>
-                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">{{ \App\Models\User::count() }}</h3>
+                <h3 class="mt-5 text-3xl font-bold md:text-4xl text-shadow-md">{{ \App\Models\User::count() }}</h3>
             </div>
 
             <!-- KARTU 2: PENDAPATAN -->
             <div class="group text-center flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
                 <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Order Service</p>
-                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">{{\App\Models\Order::count()}}</h3>
+                <h3 class="mt-5 text-3xl font-bold md:text-4xl text-shadow-md">{{\App\Models\Order::count()}}</h3>
             </div>
 
             <!-- KARTU 3: UPTIME SERVER -->
@@ -280,7 +280,7 @@
             <!-- KARTU 4: PROYEK BARU -->
             <div class="group text-center flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
                 <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Product</p>
-                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">{{\App\Models\Product::count()}}</h3>
+                <h3 class="mt-5 text-3xl font-bold md:text-4xl text-shadow-md">{{\App\Models\Product::count()}}</h3>
             </div>
         </div>
 
