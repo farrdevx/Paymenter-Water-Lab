@@ -184,6 +184,87 @@
         box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
     }
 }
+
+.stat-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            /* Animasi untuk ikon */
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #1abc9c; /* Warna hijau cerah */
+            /* Animasi untuk angka */
+            animation: pulseNumber 2s infinite;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #bdc3c7; /* Warna abu-abu terang */
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+        
+        /* Efek glow di background */
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                transparent,
+                rgba(26, 188, 156, 0.2),
+                transparent 30%
+            );
+            animation: rotateGlow 4s linear infinite;
+        }
+
+
+        /* Definisi Animasi (Keyframes) */
+
+        /* 1. Animasi untuk Ikon (mengambang) */
+        @keyframes floatIcon {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* 2. Animasi untuk Angka (berdenyut) */
+        @keyframes pulseNumber {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                text-shadow: 0 0 20px rgba(26, 188, 156, 1);
+            }
+            100% {
+                transform: scale(1);
+                text-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+            }
+        }
+        
+        /* 3. Animasi untuk Glow Background (berputar) */
+        @keyframes rotateGlow {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
 </style>
 <div>
     <div class="flex flex-col gap-6">
@@ -201,7 +282,14 @@
 
         
         <h2 class="text-base md:text-xl font-semibold tracking-[0.2em] md:tracking-[0.3em] uppercase text-white mb-5 text-shadow text-center">
-           📊 Our Statistic 📊
+           <div class="stat-card">
+                <div class="stat-icon">
+                    📊
+                </div>
+                <div class="stat-number">
+                    OUR STATISTIC
+                </div>
+            </div>
         </h2>
         
         <div class="flex flex-col flex-wrap items-center justify-center w-full gap-5 md:flex-row md:items-stretch md:gap-8">
