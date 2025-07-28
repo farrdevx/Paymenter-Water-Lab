@@ -36,7 +36,7 @@
             $uptimePercentage = 'N/A';
         }
     } catch (Exception $e) {
-        $uptimeString = 'Gagal mengakses data uptime (mungkin bukan server Linux).';
+        $uptimeString = 'Gagal mengakses data uptime.';
         $uptimePercentage = 'N/A';
     }
 @endphp
@@ -262,14 +262,15 @@
 
             <!-- KARTU 2: PENDAPATAN -->
             <div class="group text-center flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
-                <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Pendapatan (Bulan Ini)</p>
-                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">Coming Soon</h3>
+                <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Order Service</p>
+                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">{{\App\Models\Order::count()}}</h3>
             </div>
 
             <!-- KARTU 3: UPTIME SERVER -->
             <div class="group text-center items-center flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
-                <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Uptime Server</p>
+                <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Uptime Website</p>
                 <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">{{ $uptimePercentage }}</h3>
+                <p>{{$uptimeString}}</p>
                 <div class="text-center live-status">
                     <span class="live-indicator"></span>
                     <span>LIVE DATA</span>
@@ -278,8 +279,8 @@
 
             <!-- KARTU 4: PROYEK BARU -->
             <div class="group text-center flex-grow w-full md:w-auto md:min-w-[220px] md:max-w-[250px] p-6 rounded-xl bg-gradient-to-brfrom-gray-900/45 to-white-800/35 backdrop-blur-lg shadow-lg shadow-black/40 border border-blue-400/50 transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/25 hover:from-gray-900/55 hover:to-blue-800/45 flex flex-col gap-3">
-                <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Proyek Baru</p>
-                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">142</h3>
+                <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Product</p>
+                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">{{\App\Models\Product::count()}}</h3>
             </div>
         </div>
 

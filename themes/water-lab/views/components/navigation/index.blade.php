@@ -1,16 +1,20 @@
 <style>
-    .navigate-waterlab{
-        width: 80%;                      /* Lebar 70% dari viewport */
-    margin: 20px auto 0 auto;        /* Margin atas 20px, dan auto untuk tengah horizontal */
-    border-radius: 15px;             /* Sudut yang melengkung */
-    
+.navigate-waterlab {
+    width: 80%;
+    margin: 20px auto 0 auto;
+    border-radius: 15px;
+
     /* --- EFEK KACA (GLASSMORPHISM) --- */
-    background: rgba(255, 255, 255, 0.1); /* Warna latar belakang transparan */
-    backdrop-filter: blur(20px);     /* Efek blur pada konten di belakangnya */
-    -webkit-backdrop-filter: blur(10px); /* Untuk support browser Safari */
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Border tipis untuk menonjolkan tepi */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* Samakan nilainya */
+    border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    }
+
+    /* --- TAMBAHAN PENTING --- */
+    position: relative; /* Diperlukan agar z-index berfungsi */
+    z-index: 1000;      /* Nilai tinggi untuk memastikan selalu di atas */
+}
 </style>
 
 <nav class="flex flex-col px-4 border-b navigate-waterlab lg:px-8 border-neutral md:h-16 md:flex-row">
