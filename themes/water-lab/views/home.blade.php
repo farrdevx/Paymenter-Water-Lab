@@ -133,6 +133,20 @@
         <h2 class="text-base md:text-xl font-semibold tracking-[0.2em] md:tracking-[0.3em] uppercase text-white mb-5 text-shadow text-center">
            📊 Our Statistic 📊
         </h2>
+
+        @php
+    $userCount = 0; // Nilai default
+    $apiToken = 'PAYMb16ec9b919ea8ed549083f421bfd1c82ef0346f9903d697fbeffa65cb4114489'; 
+
+    if ($apiToken) {
+        $response = \Illuminate\Support\Facades\Http::withToken($apiToken)
+                        ->get(config('app.url') . '/api/v1/admin/users');
+
+        if ($response->successful()) {
+            $userCount = $response->json()['meta']['total'] ?? 0;
+        }
+    }
+@endphp
         
         <div class="flex flex-col flex-wrap items-center justify-center w-full gap-5 md:flex-row md:items-stretch md:gap-8">
             
@@ -144,7 +158,7 @@
                     </svg>
                 </div>
                 <p class="text-sm font-normal text-blue-100 md:text-base text-shadow-sm">Pengguna Aktif</p>
-                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">1,2 Juta</h3>
+                <h3 class="text-3xl font-bold md:text-4xl text-shadow-md">{{ $userCount }}</h3>
             </div>
 
             <!-- KARTU 2: PENDAPATAN -->
