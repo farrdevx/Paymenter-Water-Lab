@@ -40,7 +40,7 @@
 <body class="flex flex-col w-full min-h-screen text-base antialiased background-waterlab" x-cloak x-data="{darkMode: $persist(window.matchMedia('(prefers-color-scheme: dark)').matches)}" :class="{'dark': darkMode}">
     <style>
         .background-waterlab{
-            background-image: url('https://i.pinimg.com/1200x/62/d8/1b/62d81bf826383f12a334df0a42ecc298.jpg');
+            background-image: url('https://i.pinimg.com/1200x/37/5b/6f/375b6f41145eae0282ac17b4fc727844.jpg');
             background-position: center center;
             background-repeat: no-repeat;
             background-size: cover;

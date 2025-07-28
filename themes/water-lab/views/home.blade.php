@@ -249,12 +249,6 @@
         
         <h2 class="text-base md:text-xl font-semibold tracking-[0.2em] md:tracking-[0.3em] uppercase text-white mb-5 text-shadow text-center">
            <div class="stat-card">
-                <div class="stat-icon">
-                    📊
-                </div>
-                <div class="stat-number">
-                    OUR STATISTIC
-                </div>
             </div>
         </h2>
         
