@@ -185,7 +185,7 @@
     }
 }
 
-.stat-icon {
+/* .stat-icon {
             font-size: 40px;
             margin-bottom: 15px;
             /* Animasi untuk ikon */
@@ -199,35 +199,7 @@
             /* Animasi untuk angka */
             animation: pulseNumber 2s infinite;
         }
-
-        .stat-label {
-            font-size: 16px;
-            color: #bdc3c7; /* Warna abu-abu terang */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 5px;
-        }
         
-        /* Efek glow di background */
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: conic-gradient(
-                transparent,
-                rgba(26, 188, 156, 0.2),
-                transparent 30%
-            );
-            animation: rotateGlow 4s linear infinite;
-        }
-
-
-        /* Definisi Animasi (Keyframes) */
-
-        /* 1. Animasi untuk Ikon (mengambang) */
         @keyframes floatIcon {
             0% {
                 transform: translateY(0px);
@@ -244,25 +216,15 @@
         @keyframes pulseNumber {
             0% {
                 transform: scale(1);
-                text-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
+                text-shadow: 0 0 5px rgba(15, 202, 226, 0.5);
             }
             50% {
                 transform: scale(1.05);
-                text-shadow: 0 0 20px rgba(26, 188, 156, 1);
+                text-shadow: 0 0 20px rgba(15, 202, 226, 0.5);
             }
             100% {
                 transform: scale(1);
-                text-shadow: 0 0 5px rgba(26, 188, 156, 0.5);
-            }
-        }
-        
-        /* 3. Animasi untuk Glow Background (berputar) */
-        @keyframes rotateGlow {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
+                text-shadow: 0 0 5px rgba(15, 202, 226, 0.5);
             }
         }
 </style>
