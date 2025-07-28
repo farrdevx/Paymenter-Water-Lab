@@ -185,7 +185,7 @@
     }
 }
 
-/* .stat-icon {
+    .stat-icon {
             font-size: 40px;
             margin-bottom: 15px;
             /* Animasi untuk ikon */
@@ -199,7 +199,11 @@
             /* Animasi untuk angka */
             animation: pulseNumber 2s infinite;
         }
-        
+
+
+        /* Definisi Animasi (Keyframes) */
+
+        /* 1. Animasi untuk Ikon (mengambang) */
         @keyframes floatIcon {
             0% {
                 transform: translateY(0px);
