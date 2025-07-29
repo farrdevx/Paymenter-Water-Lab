@@ -1,11 +1,11 @@
 <!-- 1. WADAH BARU: Untuk memposisikan navbar di tengah dan memberi jarak dari atas -->
-<div class="fixed top-4 w-full flex justify-center px-4">
+<div class="absolute top-4 w-full flex justify-center px-4 ">
 
     <!-- 2. NAVBAR UTAMA: Kelasnya diubah untuk gaya floating pill, tanpa mengubah isinya. -->
     <nav 
         x-data="{ slideOverOpen: false }"
         x-init="$watch('slideOverOpen', value => { document.documentElement.style.overflow = value ? 'hidden' : '' })"
-        class="w-full z-10 mt-4 max-w-7xl h-16 px-4 sm:px-6 flex items-center justify-between bg-slate-900/60 border border-white/10 rounded-full shadow-xl backdrop-blur-lg"
+        class="w-full  mt-4 max-w-7xl h-16 px-4 sm:px-6 flex items-center justify-between bg-slate-900/60 border border-white/10 rounded-full shadow-xl backdrop-blur-lg"
     >
         <!-- Konten di dalam nav (TIDAK DIUBAH SAMA SEKALI) -->
         <div class="w-full h-full flex items-center justify-between">

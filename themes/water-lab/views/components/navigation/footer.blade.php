@@ -3,10 +3,10 @@
         <div class="flex flex-col gap-2 items-center">
             <x-logo />
             <div class="text-sm text-base/80">
-                {{ __('© :year :app_name. | All rights reserved.', ['year' => date('Y'), 'app_name' => config('app.name')]) }}
+                <b>{{ __('© :year :app_name. | All rights reserved.', ['year' => date('Y'), 'app_name' => config('app.name')]) }}</b>
             </div>
             {{-- Paymenter is free and opensource, removing this link is not cool --}}
-            {{-- <a href="https://paymenter.org" target="_blank" 
+            <a href="https://paymenter.org" target="_blank" 
                 class="group mt-4 mb-6 flex items-center gap-2 text-base/50 hover:text-base">
                 <svg class="size-4 text-current group-hover:text-[#4667FF]" width="150" height="205" viewBox="0 0 150 205" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_1_17)">
@@ -18,8 +18,8 @@
                         </clipPath>
                     </defs>
                 </svg>
-                <p class="text-sm">{{ __('Powered by') }} Paymenter</p>
-            </a> --}}
+                <b class="text-sm" style="color: white">{{ __('Powered by') }} Paymenter x FarrCloud</b>
+            </a>
         </div>
     </div>
 </footer>
