@@ -2,7 +2,7 @@
     <h1 class="mb-1 text-2xl font-bold text-center text-white-500">Detail Produk</h1>
 
     <!-- Card Detail Produk -->
-    <div class="flex flex-col grid-cols-2 gap-3 p-3 transition-all duration-300 border md:grid md:gap-12 bg-slate-900/50 backdrop-blur-lg border-sky-900/50 rounded-2xl md:p-4 hover:border-sky-500/70 hover:shadow-2xl">
+    <div class="grid gap-4 sm:grid-cols-2 md:grid-cols-3 h-fit">
 
         <!-- Kolom Gambar -->
         <div class="flex items-center justify-center">
@@ -17,14 +17,14 @@
 
             <!-- Status Stok -->
             @if ($product->stock === 0)
-            <span class="px-3 py-1 mb-4 text-xs font-medium text-red-400 border rounded-full me-2 bg-green-500/10 border-green-500/30 w-fit">
+            <span class="text-xs font-medium me-2 px-2.5 py-0.5 rounded bg-red-900 text-red-300 w-fit mb-3">
                 {{ __('product.out_of_stock', ['product' => $product->name]) }}
             </span>
-            @elseif($product->stock > 0)
-            <span class="px-3 py-1 mb-4 text-xs font-medium text-green-400 border rounded-full me-2 bg-green-500/10 border-green-500/30 w-fit">
+        @elseif($product->stock > 0)
+            <span class="text-xs font-medium me-2 px-2.5 py-0.5 rounded bg-green-900 text-green-300 w-fit mb-3">
                 {{ __('product.in_stock') }}
             </span>
-            @endif
+        @endif
 
             <!-- Nama & Harga -->
             <div class="flex flex-row items-start justify-between mb-4">
