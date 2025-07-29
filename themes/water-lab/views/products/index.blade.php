@@ -1,28 +1,40 @@
-<div class="flex flex-col md:flex-row gap-8 p-4 md:p-6">
-<div>
+<div class="">
 
-    <div style="width: 280px" class="p-6 rounded-2xl bg-slate-900/50 border border-slate-800/80 backdrop-blur-md">
-
-    <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-cyan-800">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-cyan-200">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44l-2.12-2.12a1.5 1.5 0 00-1.06-.44H4.5A2.25 2.25 0 002.25 6z" />
-        </svg>
-    </div>
-            <hr class="border-slate-700/60 my-6">
-    <div>
-        <h2 class="flex text-center items-center gap-x-2 text-2xl font-bold text-white">
-            {{ $category->name }}
-            <span class="flex h-5 w-5 items-center justify-center rounded-full bg-green-500">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-3 w-3 text-white">
-                    <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" />
-                </svg>
-            </span>
-        </h2>
-        <article class="mt-2 text-sm leading-relaxed text-slate-400">
-            {!! $category->description !!}
-        </article>
-    </div>
+@if ($category->image)
+    
+<div class="flex items-center justify-center mb-5">
+    <img src="{{Storage::url($category->image)}}" alt="" class="rounded-md object-cover" style="height: 300px; width: 100%;">
 </div>
+@endif
+
+
+
+    <div class="flex flex-col md:flex-row gap-6 md:p-6">
+    <div>
+        
+
+        <div class="md:w-[280px] md:flex-shrink-0 p-6 rounded-2xl bg-slate-900/50 border border-slate-800/80 backdrop-blur-md">
+
+        <div class="mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-cyan-800">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-cyan-200">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44l-2.12-2.12a1.5 1.5 0 00-1.06-.44H4.5A2.25 2.25 0 002.25 6z" />
+            </svg>
+        </div>
+                <hr class="border-slate-700/60 my-6">
+        <div>
+            <h2 class="flex text-center items-center gap-x-2 text-2xl font-bold text-white">
+                {{ $category->name }}
+                <span class="flex h-5 w-5 items-center justify-center rounded-full bg-green-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-3 w-3 text-white">
+                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+            </h2>
+            <article class="mt-2 text-sm leading-relaxed text-slate-400">
+                {!! $category->description !!}
+            </article>
+        </div>
+    </div>
 
 
     <div class="md:w-[280px] md:flex-shrink-0" style="margin-top: 15px;">
@@ -96,20 +108,20 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 h-fit">
                 @foreach ($products as $product)
                 <div class="flex flex-col grid-cols-2 gap-3 p-3 transition-all duration-300 border bg-slate-900/50 backdrop-blur-lg border-sky-900/50 rounded-2xl md:p-4 hover:border-sky-500/70 hover:shadow-2xl">
-                        @if ($product->stock === 0)
-                        <span class="px-3 py-1 absolute top-0 left-0 text-xs font-medium text-red-400 border rounded-full me-2 bg-green-500/10 border-green-500/30 w-fit">
-                            {{ __('product.out_of_stock', ['product' => $product->name]) }}
-                        </span>
-                        @elseif($product->stock > 0)
-                        <span style="margin-top: 90px; margin-left: 225px" class="px-3 py-1 absolute top-0 left-0 text-xs font-medium text-green-400 border rounded-full me-2 bg-green-500/10 border-green-500/30 w-fit">
-                            {{ __('product.in_stock') }}
-                        </span>
-                    @endif
                         @if ($product->image)
                         <img src="{{ Storage::url($product->image) }}" alt="{{ $product->name }}"
                             class="rounded-md w-full object-cover object-center">
                         @endif
-                        <h2 class="text-xl text-center font-bold">{{ $product->name }}</h2>
+                        <h2 class="text-xl text-center font-bold">{{ $product->name }}</h2> 
+                        @if ($product->stock === 0)
+                        <span class=" px-4 py-3 text-xs font-medium text-red-400 border rounded-full me-2 bg-green-500/10 border-green-500/30 w-fit">
+                            {{ __('product.out_of_stock', ['product' => $product->name]) }}
+                        </span>
+                        @elseif($product->stock > 0)
+                        <span style="" class="px-4 py-3 text-xs font-medium text-green-400 border rounded-full me-2 bg-green-500/10 border-green-500/30 w-fit">
+                            {{ __('product.in_stock') }}
+                        </span>
+                    @endif
                     @if ($product->description)
                         <p>Details ▼</p>
                     @endif
@@ -139,5 +151,5 @@
             </div>
         </div>
     </div>
-
+</div>
 </div>
