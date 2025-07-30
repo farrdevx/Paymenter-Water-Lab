@@ -5,6 +5,8 @@
 <div class="flex items-center justify-center mb-5">
     <img src="{{Storage::url($category->image)}}" alt="" class="rounded-md object-cover" style="height: 300px; width: 100%;">
 </div>
+@else
+
 @endif
 
 

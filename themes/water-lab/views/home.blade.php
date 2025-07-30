@@ -233,7 +233,7 @@
 </style>
 <div>
     <div class="flex flex-col gap-6">
-        <div class="container mx-auto glass-notification flex h-7" style="margin-top: 50px">
+        <div class="container mx-auto glass-notification flex" style="margin-top: 50px;">
             <article class="max-w-full flex prose dark:prose-invert">
                 <b style="color: white;"> {!! Str::markdown(theme('home_page_text', 'Welcome to Paymenter'), [
                 'allow_unsafe_links' => false,

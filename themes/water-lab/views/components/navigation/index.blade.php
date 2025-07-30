@@ -22,16 +22,17 @@
                         <x-dropdown>
                             <x-slot:trigger>
                                 <div class="flex flex-col">
-                                    <span style="z-index: 1000" class="flex flex-row items-center p-3 text-sm font-semibold whitespace-nowrap text-base hover:text-base/80">
+                                    <span style="" class="flex flex-row items-center p-3 text-sm font-semibold whitespace-nowrap text-base hover:text-base/80">
                                         {{ $nav['name'] }}
                                     </span>
                                 </div>
                             </x-slot:trigger>
-                            <x-slot:content>
+                            <x-slot:content style="z-index: 10;">
                                 @foreach ($nav['children'] as $child)
                                 <x-navigation.link
                                     :href="route($child['route'], $child['params'] ?? null)"
-                                    :spa="isset($child['spa']) ? $nav['spa'] : true">
+                                    :spa="isset($child['spa']) ? $nav['spa'] : true"
+                                    style="">
                                     {{ $child['name'] }}
                                 </x-navigation.link>
                                 @endforeach
@@ -42,7 +43,7 @@
                     <x-navigation.link
                         :href="route($nav['route'], $nav['params'] ?? null)"
                         :spa="isset($nav['spa']) ? $nav['spa'] : true"
-                        class="flex items-center p-3 z-[40]">
+                        class="flex items-center p-3">
                         {{ $nav['name'] }}
                     </x-navigation.link>
                     @endif
