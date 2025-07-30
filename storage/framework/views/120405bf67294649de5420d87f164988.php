@@ -1,0 +1,1 @@
+<svg class="size-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 13H4V11H12V4L20 12L12 20V13Z"/></svg><?php /**PATH /home/farr/Developing/paymenter/storage/framework/views/ad6a3ab072792fe77a92351c55c0b5d9.blade.php ENDPATH**/ ?>

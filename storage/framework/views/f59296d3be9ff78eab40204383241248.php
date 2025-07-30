@@ -1,0 +1,1 @@
+<svg x-show="!slideOverOpen" class="size-5 transition-transform duration-300" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"/></svg><?php /**PATH /home/farr/Developing/paymenter/storage/framework/views/2bf2763d44964ddf8d9d386adb291a3b.blade.php ENDPATH**/ ?>
