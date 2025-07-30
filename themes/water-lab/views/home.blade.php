@@ -46,7 +46,6 @@
         .glass-notification {
             /* Diubah sesuai permintaan pengguna */
             width: 50%;
-            height: 50px;
 
             color: rgb(65, 60, 60);
             position: relative;
@@ -234,8 +233,8 @@
 </style>
 <div>
     <div class="flex flex-col gap-6">
-        <div class="container mx-auto glass-notification">
-            <article class="max-w-full prose dark:prose-invert notification-text">
+        <div class="container mx-auto glass-notification flex h-7" style="margin-top: 50px">
+            <article class="max-w-full flex prose dark:prose-invert">
                 <b style="color: white;"> {!! Str::markdown(theme('home_page_text', 'Welcome to Paymenter'), [
                 'allow_unsafe_links' => false,
                 'renderer' => [

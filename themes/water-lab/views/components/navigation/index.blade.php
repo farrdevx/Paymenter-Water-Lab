@@ -22,7 +22,7 @@
                         <x-dropdown>
                             <x-slot:trigger>
                                 <div class="flex flex-col">
-                                    <span class="flex flex-row items-center p-3 text-sm font-semibold whitespace-nowrap text-base hover:text-base/80">
+                                    <span style="z-index: 1000" class="flex flex-row items-center p-3 text-sm font-semibold whitespace-nowrap text-base hover:text-base/80">
                                         {{ $nav['name'] }}
                                     </span>
                                 </div>
@@ -42,7 +42,7 @@
                     <x-navigation.link
                         :href="route($nav['route'], $nav['params'] ?? null)"
                         :spa="isset($nav['spa']) ? $nav['spa'] : true"
-                        class="flex items-center p-3">
+                        class="flex items-center p-3 z-[40]">
                         {{ $nav['name'] }}
                     </x-navigation.link>
                     @endif
@@ -51,10 +51,10 @@
             </div>
 
             <div class="flex flex-row items-center">
-                <div class="items-center hidden md:flex mr-3">
+                <div class="items-center hidden md:flex mr-3 z-[40]">
                     <x-dropdown>
                         <x-slot:trigger>
-                            <div class="flex flex-col">
+                            <div class="flex flex-col z-[80]">
                                 <span class="text-sm text-base font-semibold text-nowrap">{{ strtoupper(app()->getLocale()) }} <span class="text-base/50 font-semibold">|</span> {{ session('currency', config('settings.default_currency')) }}</span>
                             </div>
                         </x-slot:trigger>
